@@ -5,9 +5,11 @@ import reload from '../util/reload';
 import gulpLoadPlugins from 'gulp-load-plugins';
 
 const $ = gulpLoadPlugins();
-
 gulp.task('styles', () => {
   var building = process.env.build === 'true';
+  console.log(config.src.glob('styles'))
+  console.log(config.tmp.path('styles'))
+  console.log(process.cwd())
 
   return gulp.src(config.src.glob('styles'))
     .pipe($.plumber())

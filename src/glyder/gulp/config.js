@@ -8,13 +8,20 @@ const tocHelpers = require('../handlebars/helpers/toc')
 
 const $ = gulpLoadPlugins();
 
+var joinPath = path.join;
+
+var roots = {
+  glyder: path.join(__dirname, '..'),
+  project: './src'
+};
 var src = 'src';
 var dest = 'build';
 var tmp = '.tmp';
 
 var config = {
   html: {
-    root: '',
+    root: 'project',
+    path: '',
     glob: ['**/*.html']
   },
 
@@ -23,27 +30,32 @@ var config = {
   },
 
   layouts: {
-    root: 'handlebars/layouts',
+    root: 'glyder',
+    path: 'handlebars/layouts',
     glob: '**/*.hbs'
   },
 
   partials: {
-    root: 'handlebars/partials',
+    root: 'glyder',
+    path: 'handlebars/partials',
     glob: '**/*.hbs'
   },
 
   markdown: {
-    root: 'docs',
+    root: 'project',
+    path: 'docs',
     glob: '**/*.md'
   },
 
   scripts: {
-    root: 'scripts',
+    root: 'glyder',
+    path: 'scripts',
     glob: '**/*.js'
   },
 
   styles: {
-    root: 'styles',
+    root: 'glyder',
+    path: 'styles',
     glob: {
       'default': ['**/*.scss', '**/*.[^_]scss'],
       'all': '**/*.scss'
@@ -51,26 +63,31 @@ var config = {
   },
 
   images: {
-    root: 'images',
+    root: 'glyder',
+    path: 'images',
     glob: '**/*.{svg,png,gif}'
   },
 
   fonts: {
-    root: 'fonts',
+    root: 'glyder',
+    path: 'fonts',
     glob: '**/*.{eot,svg,ttf,woff,woff2}'
   },
 
   extras: {
-    root: '',
+    root: 'project',
+    path: '',
     glob: ['*.*', '!*.html']
   },
 
   test: {
+    root: 'glyder',
     src: 'test'
   },
 
   specs: {
-    root: 'test/spec',
+    root: 'glyder',
+    path: 'test/spec',
     glob: '*.spec.js'
   },
 
@@ -85,8 +102,6 @@ var config = {
     ]
   }
 };
-
-var joinPath = path.join;
 
 function prependPathToGlob(glob, path, set) {
   var globs = [];
@@ -122,10 +137,10 @@ config.src = {
       if (c.src) {
         return c.src;
       } else {
-        return joinPath(src, c.root);
+        return joinPath(roots[c.root], c.path);
       }
     } else {
-      return src;
+      return roots.project;
     }
   }
 };
@@ -134,7 +149,7 @@ config.tmp = {
   path: function(type) {
     if (type) {
       var c = config[type];
-      return joinPath(tmp, c.root);
+      return joinPath(tmp, c.path);
     } else {
       return tmp;
     }
@@ -154,7 +169,7 @@ config.dest = {
   path: function(type) {
     if (type) {
       var c = config[type];
-      return joinPath(dest, c.root);
+      return joinPath(dest, c.path);
     } else {
       return dest;
     }
