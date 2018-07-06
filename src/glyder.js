@@ -1,7 +1,16 @@
 import gulp from 'gulp';
-require('./glyder/gulpfile.babel.js'); 
+import program from 'commander'
+import {version} from '../package.json'
 
-if (gulp.tasks.styles) { 
-    console.log('gulpfile contains task!');
-    gulp.start('styles');
-}
+program
+  .version(`${version}`)
+
+program
+  .command('serve <input> <output>')
+    .action((input, output, cmd) => {
+      require('./glyder/gulpfile.babel.js'); 
+      gulp.start('serve');
+    })
+
+program
+  .parse(process.argv)

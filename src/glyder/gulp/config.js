@@ -1,4 +1,5 @@
-import _ from 'lodash'; import path from 'path';
+import _ from 'lodash';
+import path from 'path';
 import gulpLoadPlugins from 'gulp-load-plugins';
 
 const iconHelpers = require('../handlebars/helpers/icon')
@@ -7,8 +8,6 @@ const textHelpers = require('../handlebars/helpers/text')
 const tocHelpers = require('../handlebars/helpers/toc')
 
 const $ = gulpLoadPlugins();
-
-var joinPath = path.join;
 
 var roots = {
   glyder: path.join(__dirname, '..'),
@@ -103,21 +102,21 @@ var config = {
   }
 };
 
-function prependPathToGlob(glob, path, set) {
+function prependPathToGlob(glob, aPath, set) {
   var globs = [];
   if (glob.constructor === Object) {
-    return prependPathToGlob(glob[set || 'default'], path);
+    return prependPathToGlob(glob[set || 'default'], aPath);
   } else if (glob.constructor === Array) {
     glob.forEach(function(g) {
       if (_.startsWith(g, '!')) {
-        globs.push('!' + joinPath(path, g.replace('!', '')));
+        globs.push('!' + path.join(aPath, g.replace('!', '')));
       } else {
-        globs.push(joinPath(path, g));
+        globs.push(path.join(aPath, g));
       }
     });
     return globs;
   } else {
-    return joinPath(path, glob);
+    return path.join(aPath, glob);
   }
 }
 
@@ -137,7 +136,7 @@ config.src = {
       if (c.src) {
         return c.src;
       } else {
-        return joinPath(roots[c.root], c.path);
+        return path.join(roots[c.root], c.path);
       }
     } else {
       return roots.project;
@@ -149,7 +148,7 @@ config.tmp = {
   path: function(type) {
     if (type) {
       var c = config[type];
-      return joinPath(tmp, c.path);
+      return path.join(tmp, c.path);
     } else {
       return tmp;
     }
@@ -169,7 +168,7 @@ config.dest = {
   path: function(type) {
     if (type) {
       var c = config[type];
-      return joinPath(dest, c.path);
+      return path.join(dest, c.path);
     } else {
       return dest;
     }

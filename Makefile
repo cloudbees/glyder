@@ -1,7 +1,7 @@
 default: run
 
 run:
-	npx babel-node src/glyder.js
+	npx -c 'babel-node src/glyder.js -- serve test_project/src test_project/build'
 
 dist:
 	babel

@@ -27,9 +27,15 @@
   "homepage": "https://github.com/cloudbees/glyder#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "commander": "^2.16.0"
   },
   "dependencies": {
+    "browser-sync": "^2.2.1",
+    "cheerio": "^0.20.0",
+    "del": "^3.0.0",
+    "event-stream": "^3.3.2",
+    "front-matter": "^2.0.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-cache": "^0.2.8",
@@ -51,14 +57,9 @@
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^1.1.1",
     "gulp-util": "^3.0.7",
-    "browser-sync": "^2.2.1",
-    "cheerio": "^0.20.0",
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
     "lodash": "^4.6.1",
-    "del": "^3.0.0",
-    "event-stream": "^3.3.2",
-    "front-matter": "^2.0.2",
     "opn": "^1.0.1",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
