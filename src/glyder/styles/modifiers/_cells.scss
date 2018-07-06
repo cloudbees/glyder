@@ -1,0 +1,135 @@
+//
+// Cellular Grid System
+//
+// A modern, responsive and nestable grid system made according to the Oxygen CSS naming conventions. Based on ideas found in Zurb Foundation.
+//
+// The grid is made up of cells that span columns. Use the following classes to create the layout:
+//
+//     cells  -  a row or group of cells
+//     cell   -  a cell
+//
+// Use the following modifiers on cells to adjust their width and placement:
+//
+//     span-X   -  modify a cell to span X columns
+//     left-X   -  shift cells left by X columns
+//     right-X  -  shift cells right by X columns
+//     pull-X   -  move cell left by X columns
+//     push-X   -  move cell right by X columns
+//
+// Span classes are included with the following prefixes to support responsive layouts:
+//
+//     s-  Small layout and up (ideal for mobile phones)
+//     m-  Medium layout and up(ideal for tablets)
+//     l-  Large layout and up (ideal for smaller computer screens)
+//     w-  Wide layout and up (ideal for widescreen computers)
+//
+// Add the "debug" class to the container "cells" element to make it easy to see grid structure.
+//
+// Best when used with responsive padding modifiers:
+//
+//   http://codepen.io/jlong/pen/9cb3cdac6392e65199bc8f55e14019bd?editors=110
+//
+
+// Spacing
+$spacing-unit: 1rem;
+$spacing-unit-max-multiplier: 3;
+
+$grid-width: 100% !default;
+$grid-columns: 12 !default;
+$grid-column-width: $grid-width / $grid-columns;
+$grid-gutter: $spacing-unit !default;
+
+// Set width of a cell to span $columns
+@mixin cell-span($columns: 1) {
+  width: $grid-column-width * $columns;
+}
+
+// Add prefixed span modifiers for cells
+@mixin cell-span-modifiers($prefix: '') {
+  $step: 0.5;
+  $index: 0;
+  @while $index <= $grid-columns - $step {
+    $index: $index + $step;
+    $num: str-sub('' + $index, '.', '\\.');
+    &.#{$prefix}span-#{$num} {
+      @include cell-span($index);
+    }
+  }
+}
+
+// Offset a cell in $direction (left or right) by number of $columns
+@mixin cell-offset($direction, $columns) {
+  margin-#{$direction}: $grid-column-width * $columns;
+}
+
+// Shift a cell in $direction (left or right) by number of $columns
+@mixin cell-shift($direction, $columns) {
+  position: relative;
+  #{$direction}: $grid-column-width * $columns;
+}
+
+// Add offset modifiers for cells
+@mixin cell-offset-modifiers($prefix: '') {
+  $step: 0.5;
+  $index: 0;
+  @while $index <= ($grid-columns - $step) {
+    $num: str-sub('' + $index, '.', '\\.');
+    &.#{$prefix}left-#{$num} {
+      @include cell-offset(left, $index);
+    }
+    &.#{$prefix}right-#{$num} {
+      @include cell-offset(right, $index);
+    }
+    $index: $index + $step;
+  }
+}
+
+// Add shift modifiers for cells
+@mixin cell-shift-modifiers($prefix: '') {
+  $step: 0.5;
+  $index: 0;
+  @while $index <= ($grid-columns - $step) {
+    $num: str-sub('' + $index, '.', '\\.');
+    &.#{$prefix}push-#{$num} {
+      @include cell-shift(left, $index);
+    }
+    &.#{$prefix}pull-#{$num} {
+      @include cell-shift(right, $index);
+    }
+    $index: $index + $step;
+  }
+}
+
+// Add all modifers for cells
+@mixin cell-modifiers($prefix: '') {
+  @include cell-span-modifiers($prefix);
+  @include cell-offset-modifiers($prefix);
+  @include cell-shift-modifiers($prefix);
+}
+
+.cells {
+  box-sizing: border-box;
+  @extend %clearfix;
+  width: calc(#{$grid-width} + #{$grid-gutter});
+  margin-left: -$grid-gutter / 2;
+  margin-right: -$grid-gutter / 2;
+}
+
+.cell {
+  float: left;
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: $grid-gutter / 2;
+  padding-right: $grid-gutter / 2;
+
+  .debug & {
+    border: 1px solid white;
+    background: #e5e5e5;
+  }
+}
+
+.cell { @include cell-modifiers(); }
+@media #{$small-up}   { .cell { @include cell-modifiers('s-'); } }
+@media #{$medium-up}  { .cell { @include cell-modifiers('m-'); } }
+@media #{$large-up}   { .cell { @include cell-modifiers('l-'); } }
+@media #{$wide-up}    { .cell { @include cell-modifiers('w-'); } }

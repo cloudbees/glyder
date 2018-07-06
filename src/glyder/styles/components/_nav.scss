@@ -1,0 +1,88 @@
+@mixin nav-transition($transition-property...) {
+    transition-duration: 0.5s;
+    transition-property: $transition-property;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.ChromeNav {
+  background: $silver;
+  height: 100%;
+  padding: $unit * 4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $unit * 34;
+}
+
+.ChromeNav-Group {
+  user-select: none;
+}
+
+.ChromeNav-Items {
+  height: 0;
+  overflow: hidden;
+  @include nav-transition(height);
+  .is-expanded & {
+    height: auto;
+  }
+}
+
+.ChromeNav-Item {
+  display: block;
+  margin-top: $unit;
+  &:first-of-type {
+    margin-top: 0;
+  }
+  &.is-active {
+    font-weight: $bold;
+  }
+}
+
+.ChromeNav-Group .ChromeNav-Item {
+  margin-left: $unit * 2;
+}
+
+.ChromeNav-GroupTitle {
+  @extend %h5;
+  cursor: default;
+  font-weight: $semibold;
+  display: flex;
+  align-items: center;
+  margin-bottom: $unit * 2;
+}
+
+.ChromeNav-GroupTrigger {
+  margin-left: auto;
+  .Icon.x16 {
+    vertical-align: -10%;
+    @include nav-transition(transform);
+  }
+}
+
+.is-expanded .ChromeNav-GroupTrigger .Icon {
+  transform: rotateZ(-90deg);
+}
+
+.Logo {
+  display: flex;
+  align-items: center;
+}
+
+.Logo-Icon {
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+  margin-right: $unit;
+}
+
+.Logo-Subtitle {
+  font-size: .625rem;
+  font-weight: $normal;
+  line-height: 1.25;
+}
+
+.Logo-Title {
+  font-size: 1.125rem;
+  font-weight: $bold;
+  line-height: 1;
+}

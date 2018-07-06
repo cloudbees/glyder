@@ -1,0 +1,30 @@
+// Overrides
+$base-line-height: 1.4;
+$fixed-line-height: $base-line-height;
+
+// Style Guide Variables
+$sg-header-height: 60px;
+$sg-page-width: 960px;
+
+// Spacing
+$spacing-unit: 1rem;
+$spacing-unit-max-multiplier: 3;
+
+// Base Font
+$base-font-family: $source-sans-pro;
+$base-font-weight: $normal;
+$base-font-size: 15px;
+$base-line-height: 1.4;
+
+// Monospace
+$monospace-font-family: $source-code-pro;
+$monospace-font-weight: $normal;
+$monospace-font-size: 13px;
+$monospace-line-height: 1.2;
+
+// Headings
+$heading-font-family: $source-sans-pro;
+$heading-font-weight: $semibold;
+
+// Icons
+$icon-font-path: '../fonts/';

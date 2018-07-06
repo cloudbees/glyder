@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{{#if redirectTo}}
+<script>
+  window.location = "{{ baseUrl }}{{ redirectTo }}"
+</script>
+{{/if}}
+
+<title>{{ title }}</title>
+
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex">
+<!-- Place favicon.ico in the root directory -->
+
+<!-- build:css styles/vendor.css -->
+<!-- endbuild -->
+
+<!-- build:css /styles/styles.css -->
+<link rel="stylesheet" href="/styles/styles.css">
+<!-- endbuild -->
+
+</head>
+<body>
+{{> icons }}
+
+{{#if isFrontPage}}
+{{{ contents }}}
+{{ else }}
+<div class="Chrome">
+  {{> sidebar }}
+  <div class="ChromeContent">
+    <div class="typeset">
+      {{ mainHeading title }}
+      {{{ contents }}}
+    </div>
+    {{#if tocData}}
+      {{ toc tocData }}
+    {{/if}}
+  </div>
+
+  {{> footer }}
+</div>
+{{/if}}
+
+{{#if isFrontPage}}
+{{ else }}
+<script src="/scripts/vendor.js"></script>
+<script src="/scripts/ace.js"></script>
+<script src="/scripts/honeycomb.js"></script>
+{{/if}}
+
+</body>
+</html>

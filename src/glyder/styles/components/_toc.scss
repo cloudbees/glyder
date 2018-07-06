@@ -1,0 +1,31 @@
+.ToC {
+  display: none;
+  position: fixed;
+  top: $unit * 5;
+  right: $unit * 4;
+  width: 240px;
+  @media #{$wide-up} {
+    display: block;
+  } 
+}
+
+.ToC-Heading {
+  font-weight: $bold;
+  padding-left: $unit/1.75;
+}
+
+.ToC-Item {
+  line-height: 1.25;
+  margin-top: $unit * 1.5;
+}
+
+.ToCItem-Link {
+  display: block;
+  padding-left: $unit/2;
+  border-left: 2px solid transparent;
+}
+
+.ToC-Item.is-active a {
+  border-left: 2px solid $brand-blue;
+  font-weight: $medium;
+}

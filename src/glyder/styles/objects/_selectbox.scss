@@ -1,0 +1,21 @@
+$sg-selectbox-color: $text-color;
+$sg-selectbox-background-color: $light-gray;
+$sg-selectbox-padding-horizontal: 1 * $spacing-unit;
+$sg-selectbox-padding-vertical: 0.5 * $spacing-unit;
+
+.sg-selectbox {
+  appearance: none;
+
+  padding: $sg-selectbox-padding-vertical ((2 * $spacing-unit) + $sg-selectbox-padding-horizontal) $sg-selectbox-padding-vertical $sg-selectbox-padding-horizontal;
+
+  background: $sg-selectbox-background-color url(/images/select.svg) right center no-repeat;
+  border-radius: 3px;
+  box-shadow: rgba(black, 0.3) 0 2px 0 0;
+  color: $sg-selectbox-color;
+  font-weight: $normal;
+  
+  &.sg-full-width {
+    display: block;
+    width: 100%;
+  }
+}

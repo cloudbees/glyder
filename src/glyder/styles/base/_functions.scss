@@ -1,0 +1,35 @@
+// https://css-tricks.com/snippets/sass/tint-shade-functions/
+// by Hugo Giraudel
+
+// Slightly lighten a color
+// @access public
+// @param {Color} $color - color to tint
+// @param {Number} $percentage - percentage of `$color` in returned color
+// @return {Color}
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+// Slightly darken a color
+// @access public
+// @param {Color} $color - color to shade
+// @param {Number} $percentage - percentage of `$color` in returned color
+// @return {Color}
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
+
+// Substitute first occurance of $substring in $string with $replacement
+@function str-sub($string, $substring, $replacement) {
+  $result: $string;
+  $start: str-index($string, $substring);
+  @if ($start != null) {
+    $end: $start + str-length($substring);
+    $length: str-length($string);
+    $head: str-slice($string, 1, $start - 1);
+    $tail: str-slice($string, $end, -1);
+    @return $head + $replacement + $tail;
+  } @else {
+    @return $string;
+  }
+}

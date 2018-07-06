@@ -1,0 +1,42 @@
+$sg-frame-menu-background-color: $light-gray;
+$sg-frame-content-background-color: $background-color;
+
+$sg-frame-menu-width: 300px;
+
+.sg-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  background: $sg-frame-menu-background-color;
+}
+
+.sg-frame-nav {
+  color: white;
+  padding: 1 * $spacing-unit;
+  width: $sg-frame-menu-width;
+}
+
+.sg-frame-main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  background: $sg-frame-content-background-color;
+
+  transition: left 200ms ease-in-out;
+
+  .sg-frame.sg-show-nav & {
+    left: $sg-frame-menu-width;
+  }
+}
+
+.sg-frame-container {
+  max-width: 1083.226px;
+  padding-left: 2 * $spacing-unit;
+  padding-right: 2 * $spacing-unit;
+}

@@ -1,0 +1,84 @@
+$sg-nav-levels: 5;
+$sg-nav-padding-horizontal: 1 * $spacing-unit;
+$sg-nav-padding-vertical: 0.5 * $spacing-unit;
+
+$sg-nav-color: $text-color;
+$sg-nav-hover-color: $loud-color;
+$sg-nav-hover-background-color: $medium-gray;
+$sg-nav-selected-color: $reversed-loud-color;
+$sg-nav-selected-background-color: $blue;
+
+.sg-nav {
+  margin-left: -$sg-nav-padding-horizontal;
+  margin-right: -$sg-nav-padding-horizontal;
+  padding-left: $sg-nav-padding-horizontal;
+  padding-right: $sg-nav-padding-horizontal;
+}
+
+.sg-nav-item {
+}
+
+.sg-nav-item-target {
+  display: block;
+
+  margin-left: -$sg-nav-padding-horizontal;
+  margin-right: -$sg-nav-padding-horizontal;
+
+  padding: $sg-nav-padding-vertical $sg-nav-padding-horizontal;
+
+  color: $sg-nav-color;
+  text-decoration: none;
+
+  &:hover {
+    background: $sg-nav-hover-background-color;
+    color: $sg-nav-hover-color;
+  }
+
+  &.sg-is-selected {
+    background: $sg-nav-selected-background-color;
+    color: $sg-nav-selected-color;
+    font-weight: $semibold;
+  }
+
+  .sg-level-1 & {
+    font-weight: $bold;
+  }
+
+  @for $i from 1 through $sg-nav-levels {
+   .sg-nav-item.sg-level-#{$i} & {
+      padding-left: ($i * $spacing-unit) + $sg-nav-padding-horizontal;
+    }
+  }
+}
+
+.sg-nav-expander {
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+  text-align: center;
+  float: right;
+  
+  // Don't interfere with line height, but expand the click target
+  height: 18px;
+  margin-bottom: -18px;
+ 
+  &:before {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-bottom: 2px;
+
+    content: "";
+
+    border-right: 2px solid $sg-nav-color;
+    border-bottom: 2px solid $sg-nav-color;
+    vertical-align: baseline;
+    transform: rotate(-45deg);
+    transition: transform 100ms linear;
+  }
+
+  &.sg-is-expanded:before {
+    transform: rotate(45deg);
+  }
+}

@@ -1,0 +1,16 @@
+.Tip {
+  background: rgba($silver, 0.4);
+  color: $black;
+  border-radius: $border-radius;
+  border-left: 4px solid;
+  padding: $unit * 2;
+  &.do {
+    border-left-color: rgba(#8cc04f, 0.7);
+  }
+  &.do-not {
+    border-left-color: rgba(#f2aeb2, 0.7);
+  }
+  &.note {
+    border-left-color: rgba(#fceeca, 1);
+  }
+}

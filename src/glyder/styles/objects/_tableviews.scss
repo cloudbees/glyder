@@ -1,0 +1,53 @@
+$sg-text-color: $text-color;
+$sg-header-color: $heading-color;
+$sg-box-border-color: #ecf0f1;
+$sg-box-background-color: lighten(#ecf0f1, 4%);
+
+$sg-tableview-padding: 30px;
+
+.sg-tableview {
+  background: $sg-box-background-color;
+  border-radius: 15px;
+  border: 3px solid $sg-box-border-color;
+  overflow: hidden;
+}
+
+.sg-tableview-item {
+
+  & + & {
+    border-top: 3px solid $sg-box-border-color;
+  }
+}
+
+a.sg-tableview-target {
+  position: relative;
+
+  display: block;
+
+  padding: $sg-tableview-padding;  
+  color: $sg-header-color;
+  text-decoration: none;
+  font-size: 28px;
+
+  &:after {
+    position: absolute;
+    top: 50%;
+    right: $sg-tableview-padding;
+    margin-top: -14px;
+
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    border-right: 8px solid darken($sg-box-border-color, 5%);
+    border-bottom: 8px solid darken($sg-box-border-color, 5%);
+
+    transform: rotate(-45deg);
+
+    content: '';
+  }
+
+  &:hover {
+    background: white;
+  }
+}

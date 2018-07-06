@@ -1,0 +1,54 @@
+//
+// Responsive media queries
+//
+// Supports the following layouts:
+//
+//    small  -  Small layout (ideal for mobile phones)
+//    medium -  Medium layout (ideal for tablets)
+//    large  -  Large layout (ideal for smaller computer screens)
+//    wide   -  Wide layout (ideal for widescreen computers)
+//
+// Used by the grid system and other CSS to create responsive designs.
+//
+
+// Configuration
+$small-range: (0, 40em) !default;
+$medium-range: (40.5em, 64em) !default;
+$large-range: (64.5em, 90em) !default;
+$wide-range: (90.5em, 999999999em) !default;
+
+//
+// Utility functions
+//
+
+// Get the value of the lower bound of a range
+@function range-lower-bound($range){
+  @return nth($range,1);
+}
+
+// Get the value of the upper bound of a range
+@function range-upper-bound($range) {
+  @return nth($range, 2);
+}
+
+
+//
+// Media queries
+//
+
+$screen: "only screen";
+
+$landscape: "#{$screen} and (orientation: landscape)";
+$portrait: "#{$screen} and (orientation: portrait)";
+
+$small-up: $screen;
+$small-only: "#{$screen} and (max-width: #{range-upper-bound($small-range)})";
+
+$medium-up: "#{$screen} and (min-width:#{range-lower-bound($medium-range)})";
+$medium-only: "#{$screen} and (min-width:#{range-lower-bound($medium-range)}) and (max-width:#{range-upper-bound($medium-range)})";
+
+$large-up: "#{$screen} and (min-width:#{range-lower-bound($large-range)})";
+$large-only: "#{$screen} and (min-width:#{range-lower-bound($large-range)}) and (max-width:#{range-upper-bound($large-range)})";
+
+$wide-up: "#{$screen} and (min-width:#{range-lower-bound($wide-range)})";
+$wide-only: "#{$screen} and (min-width:#{range-lower-bound($wide-range)}) and (max-width:#{range-upper-bound($wide-range)})";

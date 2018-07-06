@@ -1,0 +1,15 @@
+.Chrome {
+  height: 100%;
+}
+
+.ChromeContent {
+  position: relative;
+  margin-left: $unit * 34;
+  padding: 0 ($unit * 8) ($unit * 6);
+  max-width: 800px;
+}
+
+.ChromeContent img {
+  max-width: 106%;
+  margin-left: -6%;
+}
