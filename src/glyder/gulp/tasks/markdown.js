@@ -51,8 +51,6 @@ gulp.task('markdown', ['layouts'], () => {
   var building = process.env.build === 'true';
   var meta = { title: 'Style Guide' };
   var previews = new CodePreview(config.previews);
-  console.log(config.tmp.path())
-  console.log(config.handlebars.options)
   return gulp.src(config.src.glob('markdown'))
     .pipe(previews.extract())
     .pipe($.data(function(file) {

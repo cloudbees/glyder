@@ -62,3 +62,4 @@ typings/
 
 # glyder specific
 .tmp
+test_project/build

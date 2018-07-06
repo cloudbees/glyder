@@ -27,12 +27,12 @@
   "homepage": "https://github.com/cloudbees/glyder#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "commander": "^2.16.0"
+    "babel-preset-env": "^1.7.0"
   },
   "dependencies": {
     "browser-sync": "^2.2.1",
     "cheerio": "^0.20.0",
+    "commander": "^2.16.0",
     "del": "^3.0.0",
     "event-stream": "^3.3.2",
     "front-matter": "^2.0.2",
@@ -43,10 +43,12 @@
     "gulp-concat": "^2.6.1",
     "gulp-data": "^1.2.1",
     "gulp-ext-replace": "^0.2.0",
+    "gulp-filter": "^5.1.0",
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.2.1",
     "gulp-jshint": "^2.0.0",
     "gulp-load-plugins": "^0.10.0",
+    "gulp-minify-css": "^1.2.4",
     "gulp-minify-html": "^1.0.0",
     "gulp-plumber": "^1.0.1",
     "gulp-preprocess": "^2.0.0",

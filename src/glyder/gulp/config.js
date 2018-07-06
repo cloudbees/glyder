@@ -9,12 +9,21 @@ const tocHelpers = require('../handlebars/helpers/toc')
 
 const $ = gulpLoadPlugins();
 
+if (!process.env.projectInputDir) {
+  console.error('Please specify a project input path')
+  process.exit(1)
+}
+if (!process.env.projectOutputDir) {
+  console.error('Please specify a project output path')
+  process.exit(1)
+}
+
 var roots = {
   glyder: path.join(__dirname, '..'),
-  project: './src'
+  project: process.env.projectInputDir
 };
 var src = 'src';
-var dest = 'build';
+var dest = process.env.projectOutputDir;
 var tmp = '.tmp';
 
 var config = {
@@ -42,7 +51,7 @@ var config = {
 
   markdown: {
     root: 'project',
-    path: 'docs',
+    path: '',
     glob: '**/*.md'
   },
 
@@ -76,7 +85,7 @@ var config = {
   extras: {
     root: 'project',
     path: '',
-    glob: ['*.*', '!*.html']
+    glob: ['*.*', '!*.html', '!*.hbs', '!*.md']
   },
 
   test: {

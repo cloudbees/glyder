@@ -27,7 +27,6 @@ gulp.task('build', (cb)=> {
     ['scripts', 'lint', 'html', 'images', 'extras'],
     'misc-build-files',
     'build-finish',
-    'clean:srcfiles',
     cb
   );
 });

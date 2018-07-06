@@ -4,5 +4,3 @@ import del from 'del';
 
 // Task to delete /.tmp and /build folders
 gulp.task('clean', del.bind(null, [config.tmp.path(), config.dest.path()]));
-
-gulp.task('clean:srcfiles', del.bind(null, ['build/*.hbs', 'build/*.md']))
