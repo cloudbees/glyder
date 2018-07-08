@@ -25,10 +25,6 @@
     "url": "https://github.com/cloudbees/glyder/issues"
   },
   "homepage": "https://github.com/cloudbees/glyder#readme",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
-  },
   "dependencies": {
     "browser-sync": "^2.2.1",
     "cheerio": "^0.20.0",

@@ -10,7 +10,7 @@ program
     .action(function(input, output, cmd) {
       process.env.projectInputDir = input
       process.env.projectOutputDir = output
-      require('./glyder/gulpfile.js'); 
+      require('./gulpfile.js'); 
       gulp.start('serve');
     })
 
@@ -19,7 +19,7 @@ program
     .action(function(input, output, cmd) {
       process.env.projectInputDir = input
       process.env.projectOutputDir = output
-      require('./glyder/gulpfile.js'); 
+      require('./gulpfile.js'); 
       gulp.start('build');
     })
 
@@ -28,7 +28,7 @@ program
     .action(function(input, output, cmd) {
       process.env.projectInputDir = input
       process.env.projectOutputDir = output
-      require('./glyder/gulpfile.js'); 
+      require('./gulpfile.js'); 
       gulp.start('clean');
     })
 
