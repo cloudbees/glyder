@@ -1,10 +1,10 @@
-default: serve
+default: test-serve
 
-serve:
-	node glyder/index.js serve test_project/src test_project/build
+test-serve:
+	node glyder serve test_project/src test_project/build
 
-build:
-	node glyder/index.js build test_project/src test_project/build
+test-build:
+	node glyder build test_project/src test_project/build
 
-clean:
-	node glyder/index.js clean test_project/src test_project/build
+test-clean:
+	node glyder clean test_project/src test_project/build

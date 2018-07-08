@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Flexible markdown styleguide generator with code previews",
   "main": "glyder.js",
+  "bin": "glyder/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,9 +15,11 @@
     "styleguide",
     "style",
     "guide",
-    "markdown"
+    "markdown",
+    "code preview",
+    "code"
   ],
-  author: "John W. Long <me@johnwlong.com>",
+  "author": "John W. Long <me@johnwlong.com>",
   "contributors": [
     "Michael Lee"
   ],

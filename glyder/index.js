@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var program = require('commander');
 var version = require('../package.json');
+var colors = require('colors');
 
 program
   .version(`${version}`)
@@ -31,6 +32,13 @@ program
       require('./gulpfile.js'); 
       gulp.start('clean');
     })
+
+program
+  .on('command:*', function() {
+    console.error(('Invalid command: glyder ' + program.args.join(' ')).red);
+    program.outputHelp();
+    process.exit(1);
+  })
 
 program
   .parse(process.argv)
