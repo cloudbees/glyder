@@ -1,8 +1,8 @@
-import gutil from 'gulp-util';
-import browserSync from 'browser-sync';
+var gutil = require('gulp-util');
+var browserSync = require('browser-sync');
 
 // Stream to trigger browserSync if loaded
-export default function reload(options) {
+function reload(options) {
   var opts = Object.assign({stream: true}, options || {}); 
   if (process.env.server === 'true') {
     console.log('browser sync reload...');
@@ -11,3 +11,5 @@ export default function reload(options) {
     return gutil.noop();
   }
 }
+
+module.exports = reload

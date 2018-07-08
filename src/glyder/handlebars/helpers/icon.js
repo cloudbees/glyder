@@ -1,8 +1,8 @@
-import gulpLoadPlugins from 'gulp-load-plugins';
-const $ = gulpLoadPlugins();
+var gulpLoadPlugins = require('gulp-load-plugins');
+var $ = gulpLoadPlugins();
 
-const icon = (options) => {
-  let classNames = options.hash.classNames || ''
+var icon = function(options) {
+  var classNames = options.hash.classNames || ''
   return new $.compileHandlebars.Handlebars.SafeString(`
     <svg class="Icon ${classNames}">
       <use xlink:href="#${options.hash.icon}"></use>

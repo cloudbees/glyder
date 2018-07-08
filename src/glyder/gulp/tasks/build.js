@@ -1,26 +1,26 @@
-import gulp from 'gulp';
-import config from '../config';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import runSequence from 'run-sequence';
+var gulp = require('gulp');
+var config = require('../config');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var runSequence = require('run-sequence');
 
-const $ = gulpLoadPlugins();
+var $ = gulpLoadPlugins();
 
-gulp.task('build-start', (cb) => {
+gulp.task('build-start', function(cb) {
   process.env.build = 'true';
   cb();
 });
 
-gulp.task('build-finish', () => {
+gulp.task('build-finish', function() {
   return gulp.src(config.dest.glob())
     .pipe($.size({title: 'build', gzip: true}));
 });
 
-gulp.task('misc-build-files', () => {
+gulp.task('misc-build-files', function() {
   return gulp.src(['src/CNAME'])
     .pipe(gulp.dest(config.dest.path('html')))
 })
 
-gulp.task('build', (cb)=> {
+gulp.task('build', function(cb) {
   runSequence(
     'build-start',
     'clean',

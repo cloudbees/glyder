@@ -1,34 +1,34 @@
-import gulp from 'gulp';
-import program from 'commander'
-import {version} from '../package.json'
+var gulp = require('gulp');
+var program = require('commander');
+var version = require('../package.json');
 
 program
   .version(`${version}`)
 
 program
   .command('serve <input> <output>')
-    .action((input, output, cmd) => {
+    .action(function(input, output, cmd) {
       process.env.projectInputDir = input
       process.env.projectOutputDir = output
-      require('./glyder/gulpfile.babel.js'); 
+      require('./glyder/gulpfile.js'); 
       gulp.start('serve');
     })
 
 program
   .command('build <input> <output>')
-    .action((input, output, cmd) => {
+    .action(function(input, output, cmd) {
       process.env.projectInputDir = input
       process.env.projectOutputDir = output
-      require('./glyder/gulpfile.babel.js'); 
+      require('./glyder/gulpfile.js'); 
       gulp.start('build');
     })
 
 program
   .command('clean <input> <output>')
-    .action((input, output, cmd) => {
+    .action(function(input, output, cmd) {
       process.env.projectInputDir = input
       process.env.projectOutputDir = output
-      require('./glyder/gulpfile.babel.js'); 
+      require('./glyder/gulpfile.js'); 
       gulp.start('clean');
     })
 

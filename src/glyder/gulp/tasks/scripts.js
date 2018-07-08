@@ -1,13 +1,13 @@
-import gulp from 'gulp';
-import config from '../config';
-import browserSync from 'browser-sync';
-import reload from '../util/reload';
-import gulpLoadPlugins from 'gulp-load-plugins';
+var gulp = require('gulp');
+var config = require('../config');
+var browserSync = require('browser-sync');
+var reload = require('../util/reload');
+var gulpLoadPlugins = require('gulp-load-plugins');
 
-const $ = gulpLoadPlugins();
+var $ = gulpLoadPlugins();
 
-gulp.task('scripts:vendor', () => {
-  let building = process.env.build === 'true';
+gulp.task('scripts:vendor', function() {
+  var building = process.env.build === 'true';
 
   return gulp.src([
     'node_modules/jquery/dist/jquery.min.js',
@@ -18,8 +18,8 @@ gulp.task('scripts:vendor', () => {
     .pipe($.if(building, gulp.dest(config.dest.path('scripts'))))
 })
 
-gulp.task('scripts:ace', () => {
-  let building = process.env.build === 'true';
+gulp.task('scripts:ace', function() {
+  var building = process.env.build === 'true';
 
   return gulp.src([
     'node_modules/ace-builds/src-min/ace.js',
@@ -35,8 +35,8 @@ gulp.task('scripts:ace', () => {
     .pipe($.if(building, gulp.dest(config.dest.path('scripts'))))
 })
 
-gulp.task('scripts', ['scripts:vendor', 'scripts:ace'], () => {
-  let building = process.env.build === 'true';
+gulp.task('scripts', ['scripts:vendor', 'scripts:ace'], function() {
+  var building = process.env.build === 'true';
 
   return gulp.src([
     config.src.glob('scripts')

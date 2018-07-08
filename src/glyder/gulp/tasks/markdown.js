@@ -1,25 +1,25 @@
-import gulp from 'gulp';
-import gutil from 'gulp-util';
-import fs from 'fs';
-import path from 'path';
-import frontmatter from 'front-matter';
-import showdown from 'showdown';
-import config from '../config';
-import reload from '../util/reload';
-import CodePreview from '../plugins/gulp-code-preview';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import cheerio from 'cheerio'
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var fs = require('fs');
+var path = require('path');
+var frontmatter = require('front-matter');
+var showdown = require('showdown');
+var config = require('../config');
+var reload = require('../util/reload');
+var CodePreview = require('../plugins/gulp-code-preview');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var cheerio = require('cheerio');
 
-const $ = gulpLoadPlugins();
+var $ = gulpLoadPlugins();
 
 function createToc(markup) {
-  const $ = cheerio.load(markup)
-  let headings = $('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
-  let toc = []
+  var $ = cheerio.load(markup)
+  var headings = $('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
+  var toc = []
 
   if (headings.length > 0) {
     headings.each(function() {
-      let heading = $(this)
+      var heading = $(this)
       toc.push({ title: heading.text(), id: heading.attr('id'), type: heading.prop('tagName') })
     })
   }
@@ -27,10 +27,10 @@ function createToc(markup) {
 }
 
 function activeLink(markup, title) {
-  const $ = cheerio.load(markup)
+  var $ = cheerio.load(markup)
 
   if (title) {
-    let navItem = $(".ChromeNav-Item:contains(" + title + ")") 
+    var navItem = $(".ChromeNav-Item:contains(" + title + ")") 
     navItem.addClass('is-active')
     navItem.closest('.ChromeNav-Group').addClass('is-expanded')
   }
@@ -38,10 +38,10 @@ function activeLink(markup, title) {
   return $.html()
 }
 
-gulp.task('markdown', ['layouts'], () => {
-  const markdown = new showdown.Converter({
+gulp.task('markdown', ['layouts'], function() {
+  var markdown = new showdown.Converter({
     // Valid showdown options can be found:
-    // https://github.com/showdownjs/showdown#valid-options
+    // https://github.com/shoproject wdownjs/showdown#valid-options
 
     // Provides GitHub style header IDs which are hyphenated when the header is
     // separated by spaces
@@ -66,7 +66,7 @@ gulp.task('markdown', ['layouts'], () => {
 
     .pipe($.compileHandlebars(meta, config.handlebars.options))
     .pipe($.data(function(file) {
-      let title = JSON.stringify(file.data.title)
+      var title = JSON.stringify(file.data.title)
       file.contents = new Buffer(activeLink(String(file.contents), title))
     }))
     .pipe($.extReplace('.html'))
@@ -76,7 +76,7 @@ gulp.task('markdown', ['layouts'], () => {
     .pipe(gulp.dest(config.tmp.path()))
     .pipe($.if(building, gulp.dest(config.dest.path())))
 
-    .on('finish', () => {
+    .on('finish', function() {
       previews.files()
         .pipe(gulp.dest(config.tmp.path()))
         .pipe($.if(building, gulp.dest(config.dest.path())))

@@ -1,14 +1,14 @@
-import gulp from 'gulp';
-import stylish from 'jshint-stylish';
-import config from '../config';
-import browserSync from 'browser-sync';
-import reload from '../util/reload';
-import gulpLoadPlugins from 'gulp-load-plugins';
+var gulp = require('gulp');
+var stylish = require('jshint-stylish');
+var config = require('../config');
+var browserSync = require('browser-sync');
+var reload = require('../util/reload');
+var gulpLoadPlugins = require('gulp-load-plugins');
 
-const $ = gulpLoadPlugins();
+var $ = gulpLoadPlugins();
 
 function lint(files, options) {
-  return () => {
+  return function() {
     return gulp.src(files)
       .pipe(reload({once: true}))
       .pipe($.jshint(options))

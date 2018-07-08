@@ -1,20 +1,20 @@
-import gulp from 'gulp';
-import config from '../config';
-import browserSync from 'browser-sync';
-import reload from '../util/reload';
-import gulpLoadPlugins from 'gulp-load-plugins';
+var gulp = require('gulp');
+var config = require('../config');
+var browserSync = require('browser-sync');
+var reload = require('../util/reload');
+var gulpLoadPlugins = require('gulp-load-plugins');
 
-const $ = gulpLoadPlugins();
+var $ = gulpLoadPlugins();
 
 gulp.task('html', ['markdown']);
 
-gulp.task('layouts', ['styles', 'scripts'], () => {
-  const building = process.env.build === 'true';
-  const assets = $.useref.assets({searchPath: [config.tmp.path(), config.src.path(), '.']});
-  const justhbs = $.filter(['**/*.hbs'], {restore: true});
-  const justjs = $.filter(['**/*.js'], {restore: true});
-  const justcss = $.filter(['**/*.css'], {restore: true});
-  const justassets = $.filter(['**/*.js', '**/*.css'], {restore: true});
+gulp.task('layouts', ['styles', 'scripts'], function() {
+  var building = process.env.build === 'true';
+  var assets = $.useref.assets({searchPath: [config.tmp.path(), config.src.path(), '.']});
+  var justhbs = $.filter(['**/*.hbs'], {restore: true});
+  var justjs = $.filter(['**/*.js'], {restore: true});
+  var justcss = $.filter(['**/*.css'], {restore: true});
+  var justassets = $.filter(['**/*.js', '**/*.css'], {restore: true});
 
   return gulp.src([config.src.glob('layouts'), config.src.glob('partials')])
     .pipe($.preprocess())

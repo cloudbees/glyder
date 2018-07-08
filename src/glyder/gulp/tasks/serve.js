@@ -1,9 +1,9 @@
-import gulp from 'gulp';
-import config from '../config';
-import browserSync from 'browser-sync';
-import reload from '../util/reload';
+var gulp = require('gulp');
+var config = require('../config');
+var browserSync = require('browser-sync');
+var reload = require('../util/reload');
 
-gulp.task('serve', ['html', 'images', 'extras'], () => {
+gulp.task('serve', ['html', 'images', 'extras'], function() {
   process.env.server = 'true';
 
   browserSync({
@@ -25,7 +25,7 @@ gulp.task('serve', ['html', 'images', 'extras'], () => {
   gulp.watch(config.src.glob('extras'), ['extras']);
 });
 
-gulp.task('serve:build', ['build'], () => {
+gulp.task('serve:build', ['build'], function() {
   browserSync({
     notify: false,
     port: 9000,
@@ -35,7 +35,7 @@ gulp.task('serve:build', ['build'], () => {
   });
 });
 
-gulp.task('serve:test', () => {
+gulp.task('serve:test', function() {
   browserSync({
     notify: false,
     port: 9000,

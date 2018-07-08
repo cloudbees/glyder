@@ -1,13 +1,13 @@
-import _ from 'lodash';
-import path from 'path';
-import gulpLoadPlugins from 'gulp-load-plugins';
+var _ = require('lodash');
+var path = require('path');
+var gulpLoadPlugins = require('gulp-load-plugins');
 
-const iconHelpers = require('../handlebars/helpers/icon')
-const navHelpers = require('../handlebars/helpers/nav')
-const textHelpers = require('../handlebars/helpers/text')
-const tocHelpers = require('../handlebars/helpers/toc')
+var iconHelpers = require('../handlebars/helpers/icon')
+var navHelpers = require('../handlebars/helpers/nav')
+var textHelpers = require('../handlebars/helpers/text')
+var tocHelpers = require('../handlebars/helpers/toc')
 
-const $ = gulpLoadPlugins();
+var $ = gulpLoadPlugins();
 
 if (!process.env.projectInputDir) {
   console.error('Please specify a project input path')
@@ -133,6 +133,7 @@ config.src = {
   glob: function(type, set) {
     if (type) {
       var c = config[type];
+      var p = config.src.path(type);
       return prependPathToGlob(c.glob, config.src.path(type), set);
     } else {
       return prependPathToGlob('**/*', config.src.path());
@@ -197,4 +198,4 @@ config.handlebars.options.helpers = {
   toc: tocHelpers.generateToC
 }
 
-export default config;
+module.exports = config;

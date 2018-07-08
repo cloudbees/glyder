@@ -1,7 +1,7 @@
-import gulpLoadPlugins from 'gulp-load-plugins';
-const $ = gulpLoadPlugins();
+var gulpLoadPlugins = require('gulp-load-plugins');
+var $ = gulpLoadPlugins();
 
-const mainHeading = (title) => {
+var mainHeading = function(title) {
   if (title) {
     return new $.compileHandlebars.Handlebars.SafeString(`<h1>${title}</h1>`)
   }

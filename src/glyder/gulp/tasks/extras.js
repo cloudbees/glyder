@@ -1,11 +1,11 @@
-import gulp from 'gulp';
-import config from '../config';
-import reload from '../util/reload';
-import gulpLoadPlugins from 'gulp-load-plugins';
+var gulp = require('gulp');
+var config = require('../config');
+var reload = require('../util/reload');
+var gulpLoadPlugins = require('gulp-load-plugins');
 
-const $ = gulpLoadPlugins();
+var $ = gulpLoadPlugins();
 
-gulp.task('extras', () => {
+gulp.task('extras', function() {
   var building = process.env.build === 'true';
 
   return gulp.src(

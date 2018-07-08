@@ -1,11 +1,11 @@
-import gulp from 'gulp';
-import config from '../config';
-import browserSync from 'browser-sync';
-import reload from '../util/reload';
-import gulpLoadPlugins from 'gulp-load-plugins';
+var gulp = require('gulp');
+var config = require('../config');
+var browserSync = require('browser-sync');
+var reload = require('../util/reload');
+var gulpLoadPlugins = require('gulp-load-plugins');
 
 const $ = gulpLoadPlugins();
-gulp.task('styles', () => {
+gulp.task('styles', function() {
   var building = process.env.build === 'true';
 
   return gulp.src(config.src.glob('styles'))

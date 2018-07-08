@@ -1,12 +1,12 @@
-import gulpLoadPlugins from 'gulp-load-plugins';
-const $ = gulpLoadPlugins();
+var gulpLoadPlugins = require('gulp-load-plugins');
+var $ = gulpLoadPlugins();
 
-const navItem = (url, title) => {
+var navItem = function(url, title) {
   return new $.compileHandlebars.Handlebars.SafeString(`<a class="ChromeNav-Item" href="/${url}/">${title}</a>`)
 }
 
-const navGroup = (options) => {
-  let classNames = options.hash.classNames || ''
+var navGroup = function(options) {
+  var classNames = options.hash.classNames || ''
   return new $.compileHandlebars.Handlebars.SafeString(`
     <div class="ChromeNav-Group ${classNames}">
       <h2 class="ChromeNav-GroupTitle">${options.hash.title} <span class="ChromeNav-GroupTrigger"><svg class="Icon x16"><use xlink:href="#chevron-left"></use></svg></span></h2>
@@ -17,7 +17,7 @@ const navGroup = (options) => {
   `)
 }
 
-const baseUrl = () => {
+var baseUrl = function() {
   if (process.env.server) {
     return 'http://localhost:9000'
   } else {
