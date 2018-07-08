@@ -16,8 +16,8 @@
     "guide",
     "markdown"
   ],
-  "authors": [
-    "John W. Long",
+  author: "John W. Long <me@johnwlong.com>",
+  "contributors": [
     "Michael Lee"
   ],
   "license": "MIT",
