@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var gulp = require('gulp');
 var program = require('commander');
 var package = require('./package.json');
