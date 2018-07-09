@@ -67,6 +67,12 @@ var config = {
   },
 
   images: {
+    root: 'project',
+    path: '',
+    glob: '**/*.{svg,png,gif,jpeg,jpg}'
+  },
+
+  "glyder-images": {
     root: 'glyder',
     path: 'images',
     glob: '**/*.{svg,png,gif}'

@@ -8,7 +8,7 @@ var $ = gulpLoadPlugins();
 gulp.task('images', function() {
   var building = process.env.build === 'true';
 
-  return gulp.src(config.src.glob('images'))
+  return gulp.src([config.src.glob('images'), config.src.glob('glyder-images')])
     .pipe(gulp.dest(config.tmp.path('images')))
 
     .pipe($.if(building, $.if($.if.isFile,
