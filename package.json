@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Flexible markdown styleguide generator with code previews",
   "main": "glyder.js",
-  "bin": "glyder/index.js",
+  "bin": "glyder.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

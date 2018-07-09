@@ -9,12 +9,8 @@ var tocHelpers = require('../handlebars/helpers/toc')
 
 var $ = gulpLoadPlugins();
 
-if (!process.env.projectInputDir) {
-  console.error('Please specify a project input path')
-  process.exit(1)
-}
-if (!process.env.projectOutputDir) {
-  console.error('Please specify a project output path')
+if (!process.env.projectConfig) {
+  console.error('Please use a project configuration file (glyder.json) in the root of your project directory')
   process.exit(1)
 }
 
@@ -24,7 +20,7 @@ var roots = {
 };
 var src = 'src';
 var dest = process.env.projectOutputDir;
-var tmp = '.tmp';
+var tmp = process.env.projectTmpDir;
 
 var config = {
   html: {

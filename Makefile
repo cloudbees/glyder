@@ -1,10 +1,10 @@
 default: test-serve
 
 test-serve:
-	node glyder serve test_project/src test_project/build
+	cd test_project && node ../glyder.js serve
 
 test-build:
-	node glyder build test_project/src test_project/build
+	cd test_project && node ../glyder.js build
 
 test-clean:
-	node glyder clean test_project/src test_project/build
+	cd test_project && node ../glyder.js clean
