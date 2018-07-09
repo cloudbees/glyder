@@ -246,12 +246,13 @@ PreviewAdapter.prototype.content = function() {
   var snippets = this.example.snippets
   ,   renderable = this.example.renderable() ? 1 : 0
   ,   content = []
+  ,   tabs = this.tabs()
   ;
   if (renderable) {
     content.push(`<iframe class="code-preview-content" src="${ this.example.url() }"></iframe>`);
   }
   snippets.forEach(function(snippet) {
-    var isHidden = this.tabs.length + renderable ? ' is-hidden' : '';
+    var isHidden = tabs.length + renderable ? ' is-hidden' : '';
     var code = escape(snippet.code);
     content.push(`<div class="code-preview-content${ isHidden }" data-mime-type="${ snippet.mimeType }"><pre>${ code }</pre></div>`);
   });
