@@ -9,6 +9,7 @@ var reload = require('../util/reload');
 var CodePreview = require('../plugins/gulp-code-preview');
 var gulpLoadPlugins = require('gulp-load-plugins');
 var cheerio = require('cheerio');
+var strftime = require('strftime');
 
 var $ = gulpLoadPlugins();
 
@@ -49,7 +50,10 @@ gulp.task('markdown', ['layouts'], function() {
     simplifiedAutoLink: true
   })
   var building = process.env.build === 'true';
-  var meta = { title: 'Style Guide' };
+  var meta = {
+    title: 'Style Guide',
+    copyright: strftime(process.env.projectCopyright)
+  };
   var previews = new CodePreview(config.previews);
   return gulp.src(config.src.glob('markdown'))
     .pipe(previews.extract())
