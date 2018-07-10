@@ -57,6 +57,7 @@ function readProjectConfig() {
     input: './src',
     output: './build',
     tmp: './.tmp',
+    copyright: "© %Y Your Company Here"
   };
   var raw = fs.existsSync(fname) ? fs.readFileSync('./glyder.json') : '{}';
   var parsed = JSON.parse(raw);
@@ -69,6 +70,7 @@ function setProjectOnEnv(project) {
   process.env.projectTmpDir = project.tmp;
   process.env.projectInputDir = project.input;
   process.env.projectOutputDir = project.output;
+  process.env.projectCopyright = project.copyright;
 }
 
 function runGulpTask(task) {
