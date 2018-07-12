@@ -52,6 +52,7 @@ gulp.task('markdown', ['layouts'], function() {
   var building = process.env.build === 'true';
   var meta = {
     title: 'Style Guide',
+    logo: process.env.projectLogo,
     copyright: strftime(process.env.projectCopyright)
   };
   var previews = new CodePreview(config.previews);
