@@ -119,7 +119,11 @@ function readProjectConfig() {
     output: './build',
     tmp: './.tmp',
     logo: '/glyder-logo.svg',
-    copyright: '© %Y Your Company Here'
+    copyright: '© %Y Your Company Here',
+    sections: [
+      { "name": "Guidelines", "key": "guidelines" },
+      { "name": "Components", "key": "components" }
+    ]
   };
   var raw = fs.existsSync(filename) ? fs.readFileSync(filename) : '{}';
   var parsed = JSON.parse(raw);

@@ -1,5 +1,6 @@
 ---
-title: Documentation
+title: Get Started
+section: overview
 ---
 
 Glyder Implementation:

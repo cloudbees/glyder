@@ -65,6 +65,7 @@
     "jshint-stylish": "^2.1.0",
     "lodash": "^4.6.1",
     "opn": "^1.0.1",
+    "regexp-quote": "0.0.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
     "showdown": "^1.8.6",

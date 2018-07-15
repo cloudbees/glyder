@@ -2,7 +2,7 @@ var gulpLoadPlugins = require('gulp-load-plugins');
 var $ = gulpLoadPlugins();
 
 var navItem = function(url, title) {
-  return new $.compileHandlebars.Handlebars.SafeString(`<a class="ChromeNav-Item" href="/${url}/">${title}</a>`)
+  return new $.compileHandlebars.Handlebars.SafeString(`<a class="ChromeNav-Item" href="${url}">${title}</a>`)
 }
 
 var navGroup = function(options) {

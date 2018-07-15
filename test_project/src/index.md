@@ -1,5 +1,7 @@
 ---
-title: "Hello world"
+title: "Get Started"
+section: guidelines
+index: 1
 ---
 
 Hello *weird* world!

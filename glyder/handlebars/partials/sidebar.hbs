@@ -1,19 +1,14 @@
 <div class="ChromeNav">
-  <a href="/" class="Logo">
-    <img src="{{ logo }}" />
-  </a>
-  {{#navGroup title='Guidelines' classNames='mt4'}}
-    {{navItem 'getting-started' 'Getting started'}}
-    {{navItem 'contributing' 'Contributing to the style guide'}}
-    {{navItem 'design-principles' 'CloudBees design principles'}}
-    {{navItem 'writing-style-guide' 'Writing style guide'}}
-    {{navItem 'formatting-relative-time' 'Formatting relative time'}}
-  {{/navGroup}}
-  {{#navGroup title='Styles' classNames='mt2'}}
-    {{navItem 'css-naming-convention' 'CSS naming convention'}}
-  {{/navGroup}}
-  {{#navGroup title='Components' classNames='mt2'}}
-    {{navItem 'buttons' 'Buttons'}}
-    {{navItem 'code-previews' 'Code previews'}}
-  {{/navGroup}}
+  <div class="mb4">
+    <a href="/" class="Logo">
+      <img src="{{ logo }}" />
+    </a>
+  </div>
+  {{#each navigation}}
+    {{#navGroup title=name classNames='mb2'}}
+      {{#each articles}}
+        {{navItem url title}}
+      {{/each}}
+    {{/navGroup}}
+  {{/each}}
 </div>

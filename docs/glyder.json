@@ -1,3 +1,7 @@
 {
-  "copyright": "© %Y CloudBees"
+  "copyright": "© %Y CloudBees",
+  "sections" : [
+    { "name": "Overview", "key": "overview" },
+    { "name": "Tech Notes", "key": "tech-notes" }
+  ]
 }

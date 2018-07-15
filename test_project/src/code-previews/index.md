@@ -1,6 +1,6 @@
 ---
-section: Components
 title: Code previews
+section: guidelines
 draft: true
 ---
 

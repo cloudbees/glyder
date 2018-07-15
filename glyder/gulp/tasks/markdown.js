@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var fs = require('fs');
@@ -10,6 +11,7 @@ var CodePreview = require('../plugins/gulp-code-preview');
 var gulpLoadPlugins = require('gulp-load-plugins');
 var cheerio = require('cheerio');
 var strftime = require('strftime');
+var regexpQuote = require('regexp-quote');
 
 var $ = gulpLoadPlugins();
 
@@ -39,7 +41,54 @@ function activeLink(markup, title) {
   return $.html()
 }
 
-gulp.task('markdown', ['layouts'], function() {
+function makeUrl(file) {
+  var src = path.resolve(config.src.path())
+  var srcRegExp = new RegExp("^" + regexpQuote(src))
+  var url = file.path
+  url = url.replace(/\.md$/, '.html')
+  url = url.replace(/index\.html$/, '')
+  url = url.replace(srcRegExp, '')
+  return url
+}
+
+gulp.task('navigation.json', function() {
+  var articlesBySection = {}
+  config.project.sections.forEach(function(section) {
+    if (section.hasOwnProperty('key')) {
+      articlesBySection[section.key] = []
+    }
+  })
+  return gulp.src(config.src.glob('markdown'))
+    .pipe($.data(function(file) {
+      var fm = frontmatter(String(file.contents))
+      var attrs = fm.attributes
+      if (attrs.section && articlesBySection.hasOwnProperty(attrs.section)) {
+        articlesBySection[attrs.section].push({
+          title: attrs.title,
+          url: makeUrl(file),
+          path: file.path,
+          index: attrs.hasOwnProperty('index') ? attrs.index : 100
+        })
+      }
+    }))
+    .on('finish', function() {
+      var fname = path.join(config.tmp.path(), 'navigation.json')
+      var sections = _.cloneDeep(config.project.sections)
+      var navigation = []
+      sections.forEach(function(section) {
+        if (section.hasOwnProperty('key') && articlesBySection[section.key].length) {
+          section.articles = _.sortBy(articlesBySection[section.key], ['index', 'title'])
+          navigation.push(section)
+        }
+      })
+      fs.writeFileSync(fname, JSON.stringify(navigation, null, 2))
+    })
+})
+
+gulp.task('markdown', ['navigation.json', 'layouts'], function() {
+  var navFile = path.join(config.tmp.path(), '/navigation.json')
+  var navRaw = fs.readFileSync(navFile)
+  var navigation = JSON.parse(navRaw)
   var markdown = new showdown.Converter({
     // Valid showdown options can be found:
     // https://github.com/showdownjs/showdown#valid-options
@@ -53,7 +102,9 @@ gulp.task('markdown', ['layouts'], function() {
   var meta = {
     title: 'Style Guide',
     logo: config.project.logo,
-    copyright: strftime(config.project.copyright)
+    copyright: strftime(config.project.copyright),
+    styleguide: config.project,
+    navigation: navigation
   };
   var previews = new CodePreview(config.previews);
   return gulp.src(config.src.glob('markdown'))

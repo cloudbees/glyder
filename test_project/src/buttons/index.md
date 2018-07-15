@@ -1,6 +1,6 @@
 ---
-section: Styles
 title: Buttons
+section: components
 tags: buttons, hover, button groups
 ---
 

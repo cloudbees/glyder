@@ -1,5 +1,6 @@
 ---
 title: Article Table of Contents
+section: tech-notes
 ---
 
 This document describes how the table of contents within an article is generated.

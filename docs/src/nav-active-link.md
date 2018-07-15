@@ -1,5 +1,6 @@
 ---
 title: Navigation
+section: tech-notes
 ---
 
 This document details how the active links highlighting for the navigation is done.
