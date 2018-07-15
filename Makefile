@@ -1,5 +1,8 @@
 default: test-serve
 
+docs-serve:
+	cd docs && node ../glyder.js serve
+
 test-serve:
 	cd test_project && node ../glyder.js serve
 
