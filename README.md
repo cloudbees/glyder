@@ -80,7 +80,7 @@ This will launch a preview server here:
 
 ## Made with Gulp
 
-Glyder is really a frontend for a bunch of [Gulp](gulp) tasks that combine to make a flexible style guide generator. If you are familiar with Gulp, you should find it fairly eacy to contribute.
+Glyder is really a frontend for a bunch of [Gulp](gulp) tasks that combine to make a flexible style guide generator. If you are familiar with Gulp, you should find it fairly easy to contribute.
 
 
 ## Acknowledgements
