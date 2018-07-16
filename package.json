@@ -1,6 +1,6 @@
 {
   "name": "glyder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Flexible markdown styleguide generator with code previews",
   "main": "glyder.js",
   "bin": "glyder.js",
