@@ -42,7 +42,7 @@ function activeLink(markup, title) {
 gulp.task('markdown', ['layouts'], function() {
   var markdown = new showdown.Converter({
     // Valid showdown options can be found:
-    // https://github.com/shoproject wdownjs/showdown#valid-options
+    // https://github.com/showdownjs/showdown#valid-options
 
     // Provides GitHub style header IDs which are hyphenated when the header is
     // separated by spaces
@@ -52,8 +52,8 @@ gulp.task('markdown', ['layouts'], function() {
   var building = process.env.build === 'true';
   var meta = {
     title: 'Style Guide',
-    logo: process.env.projectLogo,
-    copyright: strftime(process.env.projectCopyright)
+    logo: config.project.logo,
+    copyright: strftime(config.project.copyright)
   };
   var previews = new CodePreview(config.previews);
   return gulp.src(config.src.glob('markdown'))
