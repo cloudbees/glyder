@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var path = require('path');
+var fs = require('fs');
 var gulpLoadPlugins = require('gulp-load-plugins');
 
 var iconHelpers = require('../handlebars/helpers/icon')
@@ -8,21 +9,15 @@ var textHelpers = require('../handlebars/helpers/text')
 var tocHelpers = require('../handlebars/helpers/toc')
 
 var $ = gulpLoadPlugins();
-
-if (!process.env.projectConfig) {
-  console.error('Please use a project configuration file (glyder.json) in the root of your project directory')
-  process.exit(1)
-}
-
+var project = readProjectConfig()
 var roots = {
   glyder: path.join(__dirname, '..'),
-  project: process.env.projectInputDir
+  project: project.input
 };
-var src = 'src';
-var dest = process.env.projectOutputDir;
-var tmp = process.env.projectTmpDir;
 
 var config = {
+  project: project,
+
   html: {
     root: 'project',
     path: '',
@@ -113,6 +108,25 @@ var config = {
   }
 };
 
+function readProjectConfig() {
+  if (!process.env.GLYDER_CONFIG) {
+    console.error('Please use a project configuration file (glyder.json) in the root of your project directory')
+    process.exit(1)
+  }
+  var filename = process.env.GLYDER_CONFIG;
+  var defaults = {
+    input: './src',
+    output: './build',
+    tmp: './.tmp',
+    logo: '/glyder-logo.svg',
+    copyright: '© %Y Your Company Here'
+  };
+  var raw = fs.existsSync(filename) ? fs.readFileSync(filename) : '{}';
+  var parsed = JSON.parse(raw);
+  var result = _.merge({}, defaults, parsed);
+  return result;
+}
+
 function prependPathToGlob(glob, aPath, set) {
   var globs = [];
   if (glob.constructor === Object) {
@@ -160,9 +174,9 @@ config.tmp = {
   path: function(type) {
     if (type) {
       var c = config[type];
-      return path.join(tmp, c.path);
+      return path.join(project.tmp, c.path);
     } else {
-      return tmp;
+      return project.tmp;
     }
   }
 };
@@ -180,9 +194,9 @@ config.dest = {
   path: function(type) {
     if (type) {
       var c = config[type];
-      return path.join(dest, c.path);
+      return path.join(project.output, c.path);
     } else {
-      return dest;
+      return project.output;
     }
   }
 };

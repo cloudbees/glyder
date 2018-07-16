@@ -51,33 +51,14 @@ if (program.args.length > 1) {
   process.exit(1);
 }
 
-function readProjectConfig() {
-  var fname = './glyder.json';
-  var defaults = {
-    input: './src',
-    output: './build',
-    tmp: './.tmp',
-    logo: '/glyder-logo.svg',
-    copyright: '© %Y Your Company Here'
-  };
-  var raw = fs.existsSync(fname) ? fs.readFileSync('./glyder.json') : '{}';
-  var parsed = JSON.parse(raw);
-  var result = _.merge({}, defaults, parsed);
-  return result;
-}
-
-function setProjectOnEnv(project) {
-  process.env.projectConfig = 'true';
-  process.env.projectTmpDir = project.tmp;
-  process.env.projectInputDir = project.input;
-  process.env.projectOutputDir = project.output;
-  process.env.projectLogo = project.logo;
-  process.env.projectCopyright = project.copyright;
-}
-
 function runGulpTask(task) {
-  var project = readProjectConfig();
-  setProjectOnEnv(project);
+  var filename = './glyder.json';
+  if (!process.env.GLYDER_CONFG && fs.existsSync(filename)) {
+    process.env.GLYDER_CONFIG = filename;
+  } else {
+    console.error('Please use a project configuration file (glyder.json) in the root of your project directory')
+    process.exit(1)
+  }
   require('./glyder/gulpfile.js');
   gulp.start(task);
 }
