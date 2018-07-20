@@ -27,9 +27,9 @@ CodePreview.prototype.setConfig = function(config) {
    this.config = _.extend({
     directory: 'previews',
     baseUrl: '/previews',
-    projects: []
+    packages: []
   }, config);
-  this.setProjects(this.config.projects);
+  this.setProjects(this.config.packages);
   return this.config;
 };
 
@@ -65,7 +65,7 @@ CodePreview.prototype.extract = function() {
       if ($el.parents('example').length) { return; }
 
       var $els = $el.find('> snippet')
-      ,   project = preview.projects[$el.attr('project')]
+      ,   project = preview.projects[$el.attr('packages')]
       ,   render = $el.attr('render') ? bool($el.attr(render)) : null
       ,   example = new Example(project, render, preview.config)
       ;

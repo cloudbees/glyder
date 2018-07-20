@@ -97,14 +97,7 @@ var config = {
   },
 
   previews: {
-    projects: [
-      {
-        name: 'oxygen',
-        styles: [ 'http://oxygencss.com/styles/site.css' ],
-        scripts: [ 'http://oxygencss.com/styles/site.js' ],
-        beforeScripts: ''
-      }
-    ]
+    packages: project.packages
   }
 };
 
@@ -123,6 +116,13 @@ function readProjectConfig() {
     sections: [
       { "name": "Guidelines", "key": "guidelines" },
       { "name": "Components", "key": "components" }
+    ],
+    packages: [
+      {
+        name: 'oxygen',
+        styles: [ 'http://oxygencss.com/styles/site.css' ],
+        scripts: [ 'http://oxygencss.com/styles/site.js' ],
+      }
     ]
   };
   var raw = fs.existsSync(filename) ? fs.readFileSync(filename) : '{}';

@@ -41,6 +41,14 @@ Here are the options, with default values shown:
       "sections": [                          // Sections for the navigation 
         { "name": "Guidelines", "key": "guidelines" },
         { "name": "Components", "key": "components" }
+      ],
+
+      "packages": [                          // Package sets for code previews
+        {
+          name: 'oxygen',
+          styles: [ 'http://oxygencss.com/styles/site.css' ],
+          scripts: [ 'http://oxygencss.com/styles/site.js' ]
+        }
       ]
     }
 

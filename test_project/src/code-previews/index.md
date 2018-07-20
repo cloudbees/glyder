@@ -140,24 +140,23 @@ Which renders with full syntax highlighting:
 </example>
 
 
-### Example projects
+### Example packages
 
 Code previews can also contain additional JavaScript and Stylesheets by
-associating them with a project. This is done through the `project` attribute
+associating them with a package set. This is done through the `package` attribute
 on the `example` tag. Here's how you would add an example for the "Oxygen"
-project:
+package set:
 
 <example render="false">
-  <example project="oxygen">
+  <example packages="oxygen">
     <button class="button">Button</button>
   </example>
 </example>
 
 Which renders:
 
-<example project="oxygen">
+<example packages="oxygen">
   <button class="button">Button</button>
 </example>
 
-Projects can be configured in the `gulp` task. Edit `gulp/tasks/markdown.js` to
-add or modify projects.
+Package sets can be configured in the Glyder configuration.
