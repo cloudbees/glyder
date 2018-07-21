@@ -1,7 +1,6 @@
 ---
 title: Code previews
-section: guidelines
-draft: true
+section: overview
 ---
 
 Code previews are an easy way to document markup and styles within the

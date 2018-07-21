@@ -31,7 +31,7 @@
   {{> sidebar }}
   <div class="ChromeContent">
     <div class="typeset">
-      {{ mainHeading title }}
+      {{#unless noHeading}}{{ mainHeading title }}{{/unless}}
       {{{ contents }}}
     </div>
     {{#if tocData}}

@@ -1,10 +1,4 @@
 ---
-title: Get Started
-section: overview
+title:
+redirectTo: /overview/get-started.html
 ---
-
-Glyder Implementation:
-
-* [Handlebars Helpers](/handlebars-helpers-setup.html)
-* [Navigation](/nav-active-link.html)
-* [Article Table of Contents](/table-of-contents.html)

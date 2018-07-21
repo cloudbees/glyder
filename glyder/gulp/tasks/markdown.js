@@ -93,9 +93,9 @@ gulp.task('markdown', ['navigation.json', 'layouts'], function() {
     // Valid showdown options can be found:
     // https://github.com/showdownjs/showdown#valid-options
 
-    // Provides GitHub style header IDs which are hyphenated when the header is
-    // separated by spaces
     ghCompatibleHeaderId: true,
+    tables: true,
+    ghCodeBlocks: true,
     simplifiedAutoLink: true
   })
   var building = process.env.build === 'true';
@@ -109,6 +109,7 @@ gulp.task('markdown', ['navigation.json', 'layouts'], function() {
   var previews = new CodePreview(config.previews);
   return gulp.src(config.src.glob('markdown'))
     .pipe(previews.extract())
+    .pipe($.fileInclude())
     .pipe($.data(function(file) {
       var content = frontmatter(String(file.contents));
       var filename = path.join(config.tmp.path('layouts'), (content.layout || 'main') + '.hbs');

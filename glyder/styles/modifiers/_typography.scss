@@ -2,9 +2,9 @@ $heading-font-weight: $semibold;
 $heading-color: rgba($loud-color, 0.9);
 $reversed-heading-color: rgba($reversed-loud-color, 1);
 
-$monospace-font-family: monospace;
+$monospace-font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 $monospace-font-weight: $normal;
-$monospace-font-size: 13px;
+$monospace-font-size: 14px;
 $monospace-line-height: 1.2;
 
 @function strip-unit($num) {
@@ -13,6 +13,33 @@ $monospace-line-height: 1.2;
 
 @function calculate-rem($numerator) {
   @return #{($numerator/strip-unit($base-font-size))}rem;
+}
+
+// Font weight
+.text-thin {
+    font-weight: $thin;
+}
+.text-light {
+    font-weight: $light;
+}
+.text-normal {
+    font-weight: $normal;
+}
+.text-semibold {
+    font-weight: $semibold;
+}
+.text-bold {
+    font-weight: $bold;
+}
+.text-ultrabold {
+    font-weight: $ultrabold;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+.lowercase {
+    text-transform: lowercase;
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6,
@@ -110,6 +137,22 @@ $monospace-line-height: 1.2;
   margin: 2rem 0;
 }
 
+.table {
+  border-top: 2px solid $border-color;
+  margin: 2em 0;
+
+  th { @extend .text-bold; }
+
+  td, th {
+    padding: $unit;
+    border-bottom: 1px solid $border-color;
+
+    &:first-child { padding-left: 0; }
+
+    &:last-child { padding-right: 0; }
+  }
+}
+
 .typeset {
     h1,
     .h1 {
@@ -159,45 +202,19 @@ $monospace-line-height: 1.2;
       background: $silver;
       border-radius: $border-radius;
       color: $black;
-      padding: ($unit/4) $unit;
+      padding: ($unit/4) ($unit/2);
     }
     code, pre { @extend .monospace; }
 
     pre code {
       display: block;
-      margin-top: 1rem;
+      margin: 2em 0;
       overflow: scroll;
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
+      padding: 1em;
     }
 
     sup { @extend .superscript; }
     sub { @extend .subscript; }
+    table { @extend .table; }
 }
 
-// Font weight
-.text-thin {
-    font-weight: $thin;
-}
-.text-light {
-    font-weight: $light;
-}
-.text-normal {
-    font-weight: $normal;
-}
-.text-semibold {
-    font-weight: $semibold;
-}
-.text-bold {
-    font-weight: $bold;
-}
-.text-ultrabold {
-    font-weight: $ultrabold;
-}
-
-.uppercase {
-    text-transform: uppercase;
-}
-.lowercase {
-    text-transform: lowercase;
-}

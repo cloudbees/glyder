@@ -67,16 +67,18 @@ Glyder articles must include front matter. By default the title key is the only 
 
 Frontmater options include:
 
-| Key         | Description |
-| ----------- | ----------- |
-| **title**   | The title of the article. This appears as an H1 at the top of the page. |
-| **section** | The section in the side navigation where this article should appear. Sections are reference by key and can be declared in your Glyder config. |
-| **index**   | Used to order the navigation within a section in the sidebar. Lower values are sorted first. And then by the title of the article. By default articles have a index value of 100. |
+| Key            | Description |
+| :------------  | :---------- |
+| **title**      | The title of the article. This appears as an H1 at the top of the page. |
+| **section**    | The section in the side navigation where this article should appear. Sections are reference by key and can be declared in your Glyder config. |
+| **index**      | Used to order the navigation within a section in the sidebar. Lower values are sorted first. And then by the title of the article. By default articles have a index value of 100. |
+| **noHeading**  | Do not output the title. Instead rely on the author to include it in the Markdown portion of the article. |
+| **redirectTo** | Redirect to a specific URL. Implemented with an HTML meta refresh tag. |
 
 
 ## Development server
 
-To bring up a lightweight developement server to preview your project, use the serve command:
+To bring up a lightweight developement server to preview your project, use the `serve` command:
 
     glyder serve
 
@@ -89,18 +91,14 @@ You must use the glyder command from the root directory of the project.
 
 ## Building HTML
 
-To generate
+To generate a site in the build directory (specified in the config), use the `build` command:
 
     glyder build 
-
-This will launch a preview server here:
-
-  <http://localhost:9000>
 
 
 ## Made with Gulp
 
-Glyder is really a frontend for a bunch of [Gulp](gulp) tasks that combine to make a flexible style guide generator. If you are familiar with Gulp, you should find it fairly easy to contribute.
+Glyder is really a frontend for a bunch of [Gulp][gulp] tasks that combine to make a flexible style guide generator. If you are familiar with Gulp, you should find it fairly easy to contribute.
 
 
 ## Acknowledgements

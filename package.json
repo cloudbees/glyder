@@ -44,6 +44,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-data": "^1.2.1",
     "gulp-ext-replace": "^0.2.0",
+    "gulp-file-include": "^2.0.1",
     "gulp-filter": "^5.1.0",
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.2.1",
