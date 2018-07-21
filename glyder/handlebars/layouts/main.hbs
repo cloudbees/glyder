@@ -5,11 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{{#if redirectTo}}
-<script>
-  window.location = "{{ baseUrl }}{{ redirectTo }}"
-</script>
-{{/if}}
+{{#if redirectTo}}<meta http-equiv="refresh" content="0; url={{ redirectTo }}">{{/if}}
 
 <title>{{ title }}</title>
 
