@@ -8,6 +8,7 @@ To do
 - [x] Make packages for code previews customizable in the config file
 - [ ] Make code previews work with JSX to make it easy to document React components
 - [ ] Pretty URLs
+- [ ] Edit with GitHub button
 - [ ] Add configuration hooks to run scripts to compile "packages" when building or serving
 - [ ] Add an "init" command that creates the default config and directory structure for a project
 - [ ] Add a way of specifying a default package for code previews
