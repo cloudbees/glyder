@@ -52,6 +52,7 @@ function makePath(file) {
 
 function makeUrl(file) {
   var url = makePath(file)
+  url = url.replace(/^\/?/, '/')
   url = url.replace(/\.md$/, '.html')
   url = url.replace(/index\.html$/, '')
   return url
