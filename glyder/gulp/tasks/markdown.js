@@ -41,14 +41,25 @@ function activeLink(markup, title) {
   return $.html()
 }
 
-function makeUrl(file) {
+function makePath(file) {
   var src = path.resolve(config.src.path())
+  src = (!/\/$/.test(src)) ? src + '/' : src
   var srcRegExp = new RegExp("^" + regexpQuote(src))
-  var url = file.path
+  var filename = file.path
+  filename = filename.replace(srcRegExp, '')
+  return filename
+}
+
+function makeUrl(file) {
+  var url = makePath(file)
   url = url.replace(/\.md$/, '.html')
   url = url.replace(/index\.html$/, '')
-  url = url.replace(srcRegExp, '')
   return url
+}
+
+function makeEditUrl(editTemplate, file) {
+  var filename = makePath(file)
+  return editTemplate.replace(/%filename%/i, filename)
 }
 
 gulp.task('navigation.json', function() {
@@ -115,6 +126,9 @@ gulp.task('markdown', ['navigation.json', 'layouts'], function() {
       var filename = path.join(config.tmp.path('layouts'), (content.layout || 'main') + '.hbs');
       var layout = fs.readFileSync(filename);
       var result = markdown.makeHtml(content.body)
+      if (config.project.edit) {
+        content.attributes['editUrl'] = makeEditUrl(config.project.edit, file);
+      }
       content.attributes['contents'] = result;
       file.contents = new Buffer(layout);
       content.attributes.tocData = createToc(result)

@@ -1,3 +1,4 @@
 {
-  "copyright": "© %Y CloudBees"
+  "copyright": "© %Y CloudBees",
+  "edit": "https://github.com/cloudbees/glyder/edit/master/test_project/src/%filename%"
 }

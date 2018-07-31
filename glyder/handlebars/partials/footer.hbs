@@ -1,3 +1,4 @@
 <div class="ChromeFooter">
-  <div class="Copyright mlauto">{{ copyright }}</div>
+  {{#if editUrl}}<div class="right"><button class="Button is-small" onclick="window.location = '{{editUrl}}'">Edit Page</button></div>{{/if}}
+  <div>{{ copyright }}</div>
 </div>

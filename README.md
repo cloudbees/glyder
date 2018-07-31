@@ -36,6 +36,9 @@ Here are the options, with default values shown:
 
       "logo": "/glyder-logo.svg",            // Relative URL for the logo of your project
 
+      "edit": null,                          // Edit URL template. Use this format for GitHub:
+                                             // "http://github.com/username/repository/edit/master/%filename%"
+
       "copyright": "© %Y Your Company Here"  // Copyright for your project filtered through strftime
 
       "sections": [                          // Sections for the navigation 

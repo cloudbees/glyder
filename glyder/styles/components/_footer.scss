@@ -3,10 +3,11 @@
   max-width: 800px;
   padding-bottom: $unit * 3;
   padding: ($unit * 6) ($unit * 8);
-}
 
-.Copyright {
-  border-top: 1px solid $silver;
-  margin-top: $unit * 6;
-  padding-top: $unit * 6;
+  &:before {
+    display: block;
+    border-top: 1px solid $silver;
+    margin-bottom: $unit * 6;
+    content: ' ';
+  }
 }
