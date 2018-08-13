@@ -31,7 +31,8 @@ $(document.body).on('click', '.code-preview-tab', function(e) {
 var modes = {
   'text/html'      : 'html',
   'text/css'       : 'css',
-  'text/javascript': 'javascript'
+  'text/javascript': 'javascript',
+  'text/react'     : 'javascript'
 };
 
 $(function() {
@@ -42,6 +43,10 @@ $(function() {
     var content = pre.parent();
     var mimeType = content.attr('data-mime-type') || 'text/html';
     var kind = modes[mimeType];
+
+    if (kind == 'react') {
+      kind = 'javascript';
+    }
 
     var editor = ace.edit(this);
     editor.setTheme("ace/theme/xcode");

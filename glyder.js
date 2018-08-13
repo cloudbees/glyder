@@ -52,13 +52,6 @@ if (program.args.length > 1) {
 }
 
 function runGulpTask(task) {
-  var filename = './glyder.json';
-  if (!process.env.GLYDER_CONFG && fs.existsSync(filename)) {
-    process.env.GLYDER_CONFIG = filename;
-  } else {
-    console.error('Please use a project configuration file (glyder.json) in the root of your project directory')
-    process.exit(1)
-  }
   require('./glyder/gulpfile.js');
   gulp.start(task);
 }
