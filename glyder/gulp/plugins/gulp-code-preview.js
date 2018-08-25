@@ -5,6 +5,7 @@ var source = require('vinyl-source-stream');
 var vinylBuffer = require('vinyl-buffer');
 var es = require('event-stream');
 var cheerio = require('cheerio');
+var reactTools = require('react-tools');
 var _ = require('lodash');
 
 var PLUGIN_NAME = 'gulp-data-toc';
@@ -12,7 +13,8 @@ var PLUGIN_NAME = 'gulp-data-toc';
 var tabNames = {
   'html': 'HTML',
   'css': 'CSS',
-  'javascript': 'JavaScript'
+  'javascript': 'JavaScript',
+  'jsx': 'React'
 };
 
 var blank = /^\s*$/m;
@@ -186,7 +188,7 @@ Example.prototype.url = function() {
 };
 
 Example.prototype.renderable = function() {
-  return this.render && _.some(this.snippets, {mimeType: 'text/html'});
+  return this.render && _.some(this.snippets, function(snippet) { return isMimeTypeHtml(snippet.mimeType) });
 };
 
 // HTML to temporarily mark where the preview should be inserted
@@ -326,6 +328,11 @@ HtmlAdapter.prototype.scripts = function() {
       scripts.push(`<script>${ snippet.code }</script>`);
     });
   }
+  if (snippets['text/jsx']) {
+    snippets['text/jsx'].forEach(function(snippet) {
+      scripts.push(`<script>${ compileJsx(snippet.code) }</script>`);
+    });
+  }
   return scripts.join('');
 };
 
@@ -358,7 +365,7 @@ function bool(string) {
 
 function isMimeTypeHtml(mimeType) {
   var t = mimeType || 'text/html';
-  return t.toLowerCase() === 'text/html';
+  return t.toLowerCase() === 'text/html' || t.toLowerCase() === 'text/jsx';
 }
 
 function escape(string) {
@@ -410,6 +417,10 @@ function normalizeIndent(string) {
 function normalizeHtml(string) {
   var emptyAttr = /\s([a-z-]+)=(""|''|&quot;&quot;)/mgi;
   return string.replace(emptyAttr, ' $1');
+}
+
+function compileJsx(string) {
+  return reactTools.transform(string);
 }
 
 module.exports = CodePreview;

@@ -48,9 +48,9 @@ Here are the options, with default values shown:
 
       "packages": [                          // Package sets for code previews
         {
-          name: 'oxygen',
-          styles: [ 'http://oxygencss.com/styles/site.css' ],
-          scripts: [ 'http://oxygencss.com/styles/site.js' ]
+          "name": "oxygen",
+          "styles": [ "http://oxygencss.com/styles/site.css" ],
+          "scripts": [ "http://oxygencss.com/styles/site.js" ]
         }
       ]
     }

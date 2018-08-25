@@ -121,7 +121,7 @@ function readProjectConfig() {
       {
         name: 'oxygen',
         styles: [ 'http://oxygencss.com/styles/site.css' ],
-        scripts: [ 'http://oxygencss.com/styles/site.js' ],
+        scripts: [ 'http://oxygencss.com/scripts/site.js' ],
       }
     ]
   };

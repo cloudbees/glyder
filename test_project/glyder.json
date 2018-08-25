@@ -1,4 +1,16 @@
 {
   "copyright": "© %Y CloudBees",
-  "edit": "https://github.com/cloudbees/glyder/edit/master/test_project/src/%filename%"
+  "edit": "https://github.com/cloudbees/glyder/edit/master/test_project/src/%filename%",
+  "packages": [
+      {
+        "name": "oxygen",
+        "styles": [ "http://oxygencss.com/styles/site.css" ],
+        "scripts": [ "http://oxygencss.com/scripts/site.js" ]
+      },
+      {
+        "name": "jdl",
+        "styles": [ "/styles/jdl.css" ],
+        "scripts": [ "/scripts/jdl.js" ]
+      }
+  ]
 }
