@@ -102,19 +102,15 @@ var config = {
 };
 
 function readProjectConfig() {
-  const cosmic = require('cosmiconfig');
-  const explorer = cosmic('glyder');
-  const result = explorer.searchSync();
-
-  if (!result || result.isEmpty) {
-    console.error('\n\nPlease define a glyder configuration (e.g. glyder.json)\n\n');
-    process.exit(1);
+  if (!process.env.GLYDER_CONFIG) {
+    console.error('Please use a project configuration file (glyder.json) in the root of your project directory')
+    process.exit(1)
   }
-
+  var filename = process.env.GLYDER_CONFIG;
   var defaults = {
     input: './src',
     output: './build',
-    tmp: __dirname + '/.tmp',
+    tmp: './.tmp',
     logo: '/glyder-logo.svg',
     copyright: '© %Y Your Company Here',
     sections: [
@@ -129,14 +125,10 @@ function readProjectConfig() {
       }
     ]
   };
-
-  var out = _.merge({}, defaults, result.config);
-
-  if (!fs.existsSync(out.tmp)) {
-    fs.mkdirSync(out.tmp);
-  }
-
-  return out;
+  var raw = fs.existsSync(filename) ? fs.readFileSync(filename) : '{}';
+  var parsed = JSON.parse(raw);
+  var result = _.merge({}, defaults, parsed);
+  return result;
 }
 
 function prependPathToGlob(glob, aPath, set) {
