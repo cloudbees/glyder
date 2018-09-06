@@ -60,6 +60,10 @@ typings/
 # next.js build output
 .next
 
+# IDE
+.idea/
+*.iml
+
 # glyder specific
 .tmp
 test_project/build

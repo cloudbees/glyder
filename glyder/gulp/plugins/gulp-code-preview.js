@@ -12,7 +12,8 @@ var PLUGIN_NAME = 'gulp-data-toc';
 var tabNames = {
   'html': 'HTML',
   'css': 'CSS',
-  'javascript': 'JavaScript'
+  'javascript': 'JavaScript',
+  'react': 'React'
 };
 
 var blank = /^\s*$/m;
@@ -56,7 +57,11 @@ CodePreview.prototype.extract = function() {
       return cb();
     }
 
-    var $ = cheerio.load(file.contents.toString(), {decodeEntities: false});
+    var $ = cheerio.load(file.contents.toString(), {
+      decodeEntities: false,
+      lowerCaseTags: false,
+      lowerCaseAttributeNames:false,
+    });
 
     $('example').each(function(i, el) {
       var $el = $(el);
@@ -77,9 +82,25 @@ CodePreview.prototype.extract = function() {
       $els.each(function(i, el) {
         var $el = $(el)
         ,   mimeType = $el.attr('type')
-        ,   code = isMimeTypeHtml(mimeType) ? $el.html() : $el.text()
+        ,   code = keepHtmlTags(mimeType) ? $el.html() : $el.text()
         ;
-        example.snippets.push(new Snippet(code, mimeType));
+        if (mimeType == 'text/react') {
+          var html = $el.html();
+          var $cp = cheerio.load(html, {
+            decodeEntities: false,
+            lowerCaseTags: false,
+            lowerCaseAttributeNames:false,
+          });
+          var $s = $cp('script:first-child');
+          $s.remove();
+
+          code = $cp.html();
+          code = code
+            .replace(/\"\{/g, '{')
+            .replace(/\}\"/g, '}')
+          ;
+        }
+        example.snippets.push(new Snippet(code, mimeType, $el));
       });
 
       $el.replaceWith(example.toPlaceholder());
@@ -147,9 +168,10 @@ CodePreview.prototype.files = function() {
 };
 
 
-function Snippet(code, mimeType) {
+function Snippet(code, mimeType, $el) {
   this.code = normalizeIndent(code);
   this.mimeType = (mimeType || 'text/html').trim();
+  this.$el = $el;
 }
 
 Snippet.prototype.name = function() {
@@ -186,7 +208,8 @@ Example.prototype.url = function() {
 };
 
 Example.prototype.renderable = function() {
-  return this.render && _.some(this.snippets, {mimeType: 'text/html'});
+  return this.render && (_.some(this.snippets, {mimeType: 'text/html'})
+    || _.some(this.snippets, {mimeType: 'text/react'}));
 };
 
 // HTML to temporarily mark where the preview should be inserted
@@ -329,6 +352,47 @@ HtmlAdapter.prototype.scripts = function() {
   return scripts.join('');
 };
 
+HtmlAdapter.prototype.renderReactSnippet = function(snippet) {
+  if (!this.registeredBabel) {
+    this.registeredBabel = true;
+    require("babel-register")({
+      ignore: /.*(node_modules(?!.@jdl)).*/,
+      presets: ['react', 'env'],
+      extensions: [".jsx", ".js"],
+    });
+  }
+
+  var requires = snippet.$el.find('> script').html();
+
+  var pre = `
+        import * as React from 'react';
+        var ReactDOMServer = require('react-dom/server');
+        ${requires}
+        module.exports = ReactDOMServer.renderToStaticMarkup(`;
+
+  var post = `);`;
+
+  var result = { code: pre + snippet.code + post };
+
+  var html;
+  var tmpFile = process.cwd() + '/tmp' + Math.random() + '.js';
+
+  try {
+    var fs = require('fs');
+    fs.writeFileSync(tmpFile, result.code);
+    try {
+      html = require(tmpFile);
+    } catch(e) {
+      console.error(e);
+      html = `<div>${e}</div>`;
+    }
+  } finally {
+    fs.unlink(tmpFile);
+  }
+
+  return html;
+};
+
 HtmlAdapter.prototype.body = function() {
   var example = this.example
   ,   snippets = this.snippets
@@ -337,6 +401,12 @@ HtmlAdapter.prototype.body = function() {
   if (snippets['text/html']) {
     snippets['text/html'].forEach(function(snippet) {
       markup.push(snippet.code);
+    });
+  }
+  if (snippets['text/react']) {
+    snippets['text/react'].forEach((snippet) => {
+      var html = this.renderReactSnippet(snippet);
+      markup.push(html);
     });
   }
   return markup.join('');
@@ -356,9 +426,9 @@ function bool(string) {
   return s === 'true' ? true : false;
 }
 
-function isMimeTypeHtml(mimeType) {
+function keepHtmlTags(mimeType) {
   var t = mimeType || 'text/html';
-  return t.toLowerCase() === 'text/html';
+  return ['text/html', 'text/react'].indexOf(t.toLowerCase()) >= 0;
 }
 
 function escape(string) {
